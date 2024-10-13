@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador Profesional Unificado Avanzado</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+    <div class="container mx-auto">
+        <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8">
+            <h1 class="text-3xl font-bold text-center mb-8 text-gray-800">Buscador Profesional Unificado Avanzado</h1>
+            
+            <div class="mb-6 relative">
+                <input type="text" id="searchQuery" placeholder="Escribe tu búsqueda..." class="w-full px-4 py-2 pr-10 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                <button id="clearButton" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600" aria-label="Borrar búsqueda">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="mb-6 flex flex-wrap justify-center gap-2" id="categoryButtons">
+                <button data-category="general" class="category-button active bg-gray-200 text-gray-800 py-2 px-4 rounded-lg transition-colors hover:bg-blue-500 hover:text-white">
+                    <i class="fas fa-globe mr-2"></i>General
+                </button>
+                <button data-category="video" class="category-button bg-gray-200 text-gray-800 py-2 px-4 rounded-lg transition-colors hover:bg-blue-500 hover:text-white">
+                    <i class="fas fa-video mr-2"></i>Video
+                </button>
+                <button data-category="books" class="category-button bg-gray-200 text-gray-800 py-2 px-4 rounded-lg transition-colors hover:bg-blue-500 hover:text-white">
+                    <i class="fas fa-book mr-2"></i>Libros
+                </button>
+                <button data-category="news" class="category-button bg-gray-200 text-gray-800 py-2 px-4 rounded-lg transition-colors hover:bg-blue-500 hover:text-white">
+                    <i class="fas fa-newspaper mr-2"></i>Noticias
+                </button>
+                <button data-category="images" class="category-button bg-gray-200 text-gray-800 py-2 px-4 rounded-lg transition-colors hover:bg-blue-500 hover:text-white">
+                    <i class="fas fa-image mr-2"></i>Imágenes
+                </button>
+                <button data-category="academic" class="category-button bg-gray-200 text-gray-800 py-2 px-4 rounded-lg transition-colors hover:bg-blue-500 hover:text-white">
+                    <i class="fas fa-graduation-cap mr-2"></i>Académico
+                </button>
+                <button data-category="repository" class="category-button bg-gray-200 text-gray-800 py-2 px-4 rounded-lg transition-colors hover:bg-blue-500 hover:text-white">
+                    <i class="fas fa-graduation-cap mr-2"></i>Repositorios
+                </button>
+               
+                
+            </div>
+            
+            <!-- Motores de búsqueda por categorías -->
+            <div id="generalEngines" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                <button data-engine="Google" class="search-button bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600" aria-label="Buscar en Google">
+                    <i class="fab fa-google mr-2"></i>Google
+                </button>
+                <button data-engine="Bing" class="search-button bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600" aria-label="Buscar en Bing">
+                    <i class="fab fa-microsoft mr-2"></i>Bing
+                </button>
+                <button data-engine="Ecosia" class="search-button bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600" aria-label="Buscar en Ecosia">
+                    <i class="fas fa-leaf mr-2"></i>Ecosia
+                </button>
+                <button data-engine="DuckDuckGo" class="search-button bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600" aria-label="Buscar en DuckDuckGo">
+                    <i class="fab fa-duckduckgo mr-2"></i>DuckDuckGo
+                </button>
+                <button data-engine="Yahoo" class="search-button bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600" aria-label="Buscar en Yahoo">
+                    <i class="fab fa-yahoo mr-2"></i>Yahoo
+                </button>
+                <button data-engine="Baidu" class="search-button bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600" aria-label="Buscar en Baidu">
+                    <i class="fab fa-baidu mr-2"></i>Baidu
+                </button>
+                <button data-engine="Yandex" class="search-button bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600" aria-label="Buscar en Yandex">
+                    <i class="fab fa-yandex mr-2"></i>Yandex
+                </button>
+                <button data-engine="Ask" class="search-button bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600" aria-label="Buscar en Ask">
+                    <i class="fas fa-question-circle mr-2"></i>Ask
+                </button>
+                <!-- Botón para Naver -->
+                <button data-engine="Naver" class="search-button bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600" aria-label="Buscar en Naver">
+                    <i class="fab fa-naver mr-2"></i>Naver
+                </button>
+                <!-- Más motores de búsqueda -->
+                <button data-engine="Qwant" class="search-button bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600" aria-label="Buscar en Qwant">
+                    <i class="fas fa-search mr-2"></i>Qwant
+                </button>
+                <button data-engine="StartPage" class="search-button bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600" aria-label="Buscar en StartPage">
+                    <i class="fas fa-user-shield mr-2"></i>StartPage
+                </button>
+            </div>
+            
+            <div id="videoEngines" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 hidden">
+                <button data-engine="YouTube" class="search-button bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600" aria-label="Buscar en YouTube">
+                    <i class="fab fa-youtube mr-2"></i>YouTube
+                </button>
+                <button data-engine="Vimeo" class="search-button bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600" aria-label="Buscar en Vimeo">
+                    <i class="fab fa-vimeo mr-2"></i>Vimeo
+                </button>
+                <button data-engine="Dailymotion" class="search-button bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600" aria-label="Buscar en Dailymotion">
+                    <i class="fas fa-play-circle mr-2"></i>Dailymotion
+                </button>
+                <button data-engine="Twitch" class="search-button bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600" aria-label="Buscar en Twitch">
+                    <i class="fab fa-twitch mr-2"></i>Twitch
+                </button>
+                <button data-engine="Bilibili" class="search-button bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600" aria-label="Buscar en Bilibili">
+                    <i class="fab fa-bilibili mr-2"></i>Bilibili
+                </button>
+                <button data-engine="Metacafe" class="search-button bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600" aria-label="Buscar en Metacafe">
+                    <i class="fas fa-video mr-2"></i>Metacafe
+                </button>
+            </div>
+
+            <div id="booksEngines" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 hidden">
+                <button data-engine="Google Books" class="search-button bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600" aria-label="Buscar en Google Books">
+                    <i class="fas fa-book mr-2"></i>Google Books
+                </button>
+                <button data-engine="Open Library" class="search-button bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" aria-label="Buscar en Open Library">
+                    <i class="fas fa-book-open mr-2"></i>Open Library
+                </button>
+                <button data-engine="Project Gutenberg" class="search-button bg-orange-500 text-white py-2 px-4 rounded-lg hover:bg-orange-600" aria-label="Buscar en Project Gutenberg">
+                    <i class="fas fa-book-reader mr-2"></i>Project Gutenberg
+                </button>
+                <button data-engine="Internet Archive" class="search-button bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600" aria-label="Buscar en Internet Archive">
+                    <i class="fas fa-archive mr-2"></i>Internet Archive
+                </button>
+            </div>
+
+            <div id="newsEngines" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 hidden">
+                <button data-engine="Google News" class="search-button bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600" aria-label="Buscar en Google News">
+                    <i class="fas fa-newspaper mr-2"></i>Google News
+                </button>
+                <button data-engine="Bing News" class="search-button bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600" aria-label="Buscar en Bing News">
+                    <i class="fas fa-newspaper mr-2"></i>Bing News
+                </button>
+                <button data-engine="Reuters" class="search-button bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600" aria-label="Buscar en Reuters">
+                    <i class="fas fa-newspaper mr-2"></i>Reuters
+                </button>
+                <button data-engine="BBC News" class="search-button bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600" aria-label="Buscar en BBC News">
+                    <i class="fas fa-newspaper mr-2"></i>BBC News
+                </button>
+            </div>
+
+            <div id="imagesEngines" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 hidden">
+                <button data-engine="Google Imágenes" class="search-button bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600" aria-label="Buscar en Google Imágenes">
+                    <i class="fab fa-google mr-2"></i>Google Imágenes
+                </button>
+                <button data-engine="Flickr" class="search-button bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600" aria-label="Buscar en Flickr">
+                    <i class="fab fa-flickr mr-2"></i>Flickr
+                </button>
+                <button data-engine="Unsplash" class="search-button bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600" aria-label="Buscar en Unsplash">
+                    <i class="fab fa-unsplash mr-2"></i>Unsplash
+                </button>
+                <button data-engine="Pixabay" class="search-button bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600" aria-label="Buscar en Pixabay">
+                    <i class="fab fa-pixabay mr-2"></i>Pixabay
+                </button>
+            </div>
+
+            <div id="academicEngines" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 hidden">
+                <button data-engine="Google Scholar" class="search-button bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600" aria-label="Buscar en Google Scholar">
+                    <i class="fas fa-graduation-cap mr-2"></i>Google Scholar
+                </button>
+                <button data-engine="JSTOR" class="search-button bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600" aria-label="Buscar en JSTOR">
+                    <i class="fas fa-file-alt mr-2"></i>JSTOR
+                </button>
+                <button data-engine="PubMed" class="search-button bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600" aria-label="Buscar en PubMed">
+                    <i class="fas fa-file-medical mr-2"></i>PubMed
+                </button>
+                <button data-engine="ResearchGate" class="search-button bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600" aria-label="Buscar en ResearchGate">
+                    <i class="fas fa-users mr-2"></i>ResearchGate
+                </button>
+                <button data-engine="IEEE Xplore" class="search-button bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600" aria-label="Buscar en IEEE Xplore">
+                    <i class="fas fa-cogs mr-2"></i>IEEE Xplore
+                </button>
+            </div>
+
+            <div id="repositoryEngines" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 hidden">
+                <button data-engine="Alicia" class="search-button bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600" aria-label="Buscar en Alicia">
+                    <i class="fas fa-graduation-cap mr-2"></i>Alicia
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const clearButton = document.getElementById('clearButton');
+        const searchQueryInput = document.getElementById('searchQuery');
+        const categoryButtons = document.querySelectorAll('.category-button');
+        const generalEngines = document.getElementById('generalEngines');
+        const videoEngines = document.getElementById('videoEngines');
+        const booksEngines = document.getElementById('booksEngines');
+        const newsEngines = document.getElementById('newsEngines');
+        const imagesEngines = document.getElementById('imagesEngines');
+        const academicEngines = document.getElementById('academicEngines');
+        const repositoryEngines = document.getElementById('repositoryEngines');
+        
+
+        clearButton.addEventListener('click', () => {
+            searchQueryInput.value = '';
+        });
+
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                categoryButtons.forEach(btn => btn.classList.remove('active', 'bg-blue-500', 'text-white'));
+                button.classList.add('active', 'bg-blue-500', 'text-white');
+
+                // Ocultar todos los motores de búsqueda
+                generalEngines.classList.add('hidden');
+                videoEngines.classList.add('hidden');
+                booksEngines.classList.add('hidden');
+                newsEngines.classList.add('hidden');
+                imagesEngines.classList.add('hidden');
+                academicEngines.classList.add('hidden');
+                repositoryEngines.classList.add('hidden');
+                
+
+                // Mostrar el motor de búsqueda correspondiente
+                const category = button.getAttribute('data-category');
+                if (category === 'general') {
+                    generalEngines.classList.remove('hidden');
+                } else if (category === 'video') {
+                    videoEngines.classList.remove('hidden');
+                } else if (category === 'books') {
+                    booksEngines.classList.remove('hidden');
+                } else if (category === 'news') {
+                    newsEngines.classList.remove('hidden');
+                } else if (category === 'images') {
+                    imagesEngines.classList.remove('hidden');
+                } else if (category === 'academic') {
+                    academicEngines.classList.remove('hidden');
+                } else if (category === 'repository') {
+                    repositoryEngines.classList.remove('hidden');
+                }
+            });
+        });
+
+        // Añadir funcionalidad de búsqueda para cada botón
+        const searchButtons = document.querySelectorAll('.search-button');
+        searchButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const engine = button.getAttribute('data-engine');
+                const query = encodeURIComponent(searchQueryInput.value);
+                let url;
+
+                // Definir la URL de búsqueda según el motor de búsqueda
+                switch (engine) {
+                    case "Google":
+                        url = `https://www.google.com/search?q=${query}`;
+                        break;
+                    case "Bing":
+                        url = `https://www.bing.com/search?q=${query}`;
+                        break;
+                    case "Ecosia":
+                        url = `https://www.ecosia.org/search?q=${query}`;
+                        break;
+                    case "DuckDuckGo":
+                        url = `https://duckduckgo.com/?q=${query}`;
+                        break;
+                    case "Yahoo":
+                        url = `https://search.yahoo.com/search?p=${query}`;
+                        break;
+                    case "Baidu":
+                        url = `https://www.baidu.com/s?wd=${query}`;
+                        break;
+                    case "Yandex":
+                        url = `https://yandex.com/search/?text=${query}`;
+                        break;
+                    case "Ask":
+                        url = `https://www.ask.com/web?q=${query}`;
+                        break;
+                    case "YouTube":
+                        url = `https://www.youtube.com/results?search_query=${query}`;
+                        break;
+                    case "Vimeo":
+                        url = `https://vimeo.com/search?q=${query}`;
+                        break;
+                    case "Dailymotion":
+                        url = `https://www.dailymotion.com/search/${query}`;
+                        break;
+                    case "Twitch":
+                        url = `https://www.twitch.tv/search?term=${query}`;
+                        break;
+                    case "Bilibili":
+                        url = `https://search.bilibili.com/all?keyword=${query}`;
+                        break;
+                    case "Metacafe":
+                        url = `http://www.metacafe.com/search/${query}/`;
+                        break;
+                    case "Google Books":
+                        url = `https://www.google.com/books/search?q=${query}`;
+                        break;
+                    case "Open Library":
+                        url = `https://openlibrary.org/search?q=${query}`;
+                        break;
+                    case "Project Gutenberg":
+                        url = `https://www.gutenberg.org/ebooks/search/?query=${query}`;
+                        break;
+                    case "Internet Archive":
+                        url = `https://archive.org/search.php?query=${query}`;
+                        break;
+                    case "Google News":
+                        url = `https://news.google.com/search?q=${query}`;
+                        break;
+                    case "Bing News":
+                        url = `https://www.bing.com/news/search?q=${query}`;
+                        break;
+                    case "Reuters":
+                        url = `https://www.reuters.com/search/news?blob=${query}`;
+                        break;
+                    case "BBC News":
+                        url = `https://www.bbc.co.uk/search?q=${query}`;
+                        break;
+                    case "Google Imágenes":
+                        url = `https://www.google.com/search?tbm=isch&q=${query}`;
+                        break;
+                    case "Flickr":
+                        url = `https://www.flickr.com/search/?text=${query}`;
+                        break;
+                    case "Unsplash":
+                        url = `https://unsplash.com/s/photos/${query}`;
+                        break;
+                    case "Pixabay":
+                        url = `https://pixabay.com/images/search/${query}/`;
+                        break;
+                    case "Google Scholar":
+                        url = `https://scholar.google.com/scholar?q=${query}`;
+                        break;
+                    case "JSTOR":
+                        url = `https://www.jstor.org/action/doBasicSearch?Query=${query}`;
+                        break;
+                    case "PubMed":
+                        url = `https://pubmed.ncbi.nlm.nih.gov/?term=${query}`;
+                        break;
+                    case "ResearchGate":
+                        url = `https://www.researchgate.net/search.Search.html?query=${query}`;
+                        break;
+                    case "IEEE Xplore":
+                        url = `https://ieeexplore.ieee.org/search/searchresult.jsp?newsearch=true&queryText=${query}`;
+                        break;
+                    case "Qwant":
+                        url = `https://www.qwant.com/?q=${query}`;
+                        break;
+                    case "StartPage":
+                        url = `https://www.startpage.com/do/search?query=${query}`;
+                        break;
+                    case "Naver":
+                        url = `https://search.naver.com/search.naver?query=${query}`;
+                        break;
+                        case "Alicia":
+    url = `https://alicia.concytec.gob.pe/vufind/Search/Results?lookfor=${query}&type=AllFields`;
+    break;
+                }
+
+                // Abrir la búsqueda en una nueva pestaña
+                if (url) {
+                    window.open(url, '_blank');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
